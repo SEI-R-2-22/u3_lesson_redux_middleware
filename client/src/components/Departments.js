@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { getDepartments } from '../store/actions/DepartmentActions'
 import { Link } from 'react-router-dom'
 
 const mapStateToProps = ({ departmentState }) => {
@@ -8,16 +7,10 @@ const mapStateToProps = ({ departmentState }) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchDepartments: () => dispatch(getDepartments())
-  }
+  return {}
 }
 
 const Departments = (props) => {
-  useEffect(() => {
-    props.fetchDepartments()
-  }, [])
-
   return (
     <div>
       {props.departmentState.departments.map((department) => (
