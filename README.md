@@ -185,7 +185,7 @@ The reason being for this is that Redux is looking for objects to be returned to
 Revert your function back to the below:
 
 ```js
-export const getDepartments = async () => async (dispatch) => {
+export const getDepartments = () => async (dispatch) => {
   try {
     const departments = await GetDepartments()
     dispatch({
