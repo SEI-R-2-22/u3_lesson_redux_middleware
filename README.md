@@ -217,7 +217,7 @@ Now that we've covered redux actions and redux thunk, it's time to put it into p
 
 - When this component mounts we want to get department by id and store its products in state.
 
-- Create a Product Reducer, you should store an array of products in state. Make sure to create a type and have a default case for this reducer.
+- Create a Product Reducer, you should store an array of products in state. Make sure to create a type and have a default case for this reducer. Don't forget to add it to your store!
 
 - Create a new department action that retrieves the department's products, a function has been imported for you.
 
