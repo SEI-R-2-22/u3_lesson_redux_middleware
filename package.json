@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "nodemon app.js",
     "start": "node app.js",
-    "setup": "sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
+    "setup": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
