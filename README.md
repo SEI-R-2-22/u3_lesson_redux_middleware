@@ -211,6 +211,8 @@ const someAction = () => ({
 
 Now that we've covered redux actions and redux thunk, it's time to put it into practice:
 
+
+
 - Create a new component called `Products`, this component should have access to our redux store. Replace the function in the `component` prop in the `Route` in app.js with your `Products` component.
 
 - When this component mounts we want to get department by id and store its products in state.
@@ -223,7 +225,7 @@ Now that we've covered redux actions and redux thunk, it's time to put it into p
 
 - You'll want to add make sure the function is accessible as `props` in your `Products` component.
 
-- You're able to access the department's id through the address bar utitilizing `props.match.params.id`.
+- You're able to access the department's id through the address bar utitilizing `props.match.params.id`. HINT: You're going to want to use this id and pass it to your action which will in turn be passed to the `GetDepartmentProducts` as an argument.
 
 - You'll want to `observe` the id in the address bar for changes, make sure to add it to the `useEffect` dependency array.
 
