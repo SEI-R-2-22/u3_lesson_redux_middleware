@@ -1,30 +1,27 @@
 # Redux Middleware
 
+![Cersei](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFMQ1jRXFeoMco%2Fgiphy.gif&f=1&nofb=1)
+
 ## Getting Started
+- `fork` and `clone`
+- `npm install` to install our dependencies
+- `npm run setup` to create and migrate our database
+- `npm run dev` to spin up our backend
+- In a new terminal, `cd` into the client directory
+- `npm install` to install our dependencies
+- `npm start` to spin up our frontend
 
-- Fork and Clone
+## What is Middleware In Redux?
 
-- npm install
-
-- npm run setup
-
-- npm run dev
-
-- open a new terminal and cd into the client directory
-
-- npm install
-
-- npm start
-
-## What is Middleware In Redux
-
-With redux, every operation we perform must be `synchronous` which means that we must execute things inline. Take `async` promises for example, the function runs and `awaits` for a response, this is an antipattern in Redux and will give you an error. However, utilizing middleware we can break these rules and perform asynchronous tasks in our actions. To do this we'll utilize a package called `redux-thunk`.
+With Redux, every operation we perform must be `synchronous`, which means that we must execute things inline. Take `async` promises for example, the function runs and `awaits` for a response, this is an anti-pattern in Redux and will give you an error. However, utilizing middleware, we can break these rules and perform asynchronous tasks in our actions. To do this we'll utilize a package called `redux-thunk`.
 
 > By default, Redux’s actions are dispatched synchronously, which is a problem for any non-trivial app that needs to communicate with an external API or perform side effects. Redux also allows for middleware that sits between an action being dispatched and the action reaching the reducers.
 
 > Thunk is a programming concept where a function is used to delay the evaluation/calculation of an operation.
 
 > Redux Thunk is a middleware that lets you call action creators that return a function instead of an action object. That function receives the store’s dispatch method, which is then used to dispatch regular synchronous actions inside the function’s body once the asynchronous operations have been completed.
+
+![Tyrion](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcopyhackers.com%2Fwp-content%2Fuploads%2F2016%2F11%2FGame-of-Thrones-Tyrion-Pour-Wine.gif&f=1&nofb=1)
 
 ## Applying Middleware to our Applications
 
@@ -46,7 +43,7 @@ Now we need to import `redux-thunk`:
 import thunk from 'redux-thunk'
 ```
 
-Let's add redux thunk to our application, modify the `createStore` function:
+Let's add Redux Thunk to our application, modify the `createStore` function:
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -65,9 +62,11 @@ export default store
 
 Redux Thunk is now successfully integrated into our app!
 
+![Hodor](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmax-media.imgix.net%2Ftransfers%2F2016%2F3%2F4%2F3987b97493592509fdf331de366969e3fa82ed50.gif&f=1&nofb=1)
+
 ## Making Asynchronous Calls In Redux
 
-Now that redux thunk is integrated as middleware, we can start making requests to our api.
+Now that Redux Thunk is integrated as middleware, we can start making requests to our API.
 
 In the `DepartmentActions.js` let's create a new action called `getDepartments`:
 
@@ -75,7 +74,7 @@ In the `DepartmentActions.js` let's create a new action called `getDepartments`:
 export const getDepartments = () => async (dispatch) => {}
 ```
 
-Notice the different syntax here for our action, we're defining a function and then returning an `asynchronous` function with dispatch being passed as an argument. Remember `dispatch` comes from redux in order to execute our state update.
+Notice the different syntax here for our action: we're defining a function and then returning an `asynchronous` function with dispatch being passed as an argument. Remember, `dispatch` comes from Redux in order to execute our state update.
 
 Let's add a `try/catch` block to this function:
 
@@ -88,7 +87,7 @@ export const getDepartments = () => async (dispatch) => {
 }
 ```
 
-Let's make a request to the api utilizing the `GetDepartments` function being imported for you:
+Let's make a request to the API utilizing the `GetDepartments` function being imported for you:
 
 ```js
 export const getDepartments = () => async (dispatch) => {
@@ -117,13 +116,13 @@ const mapDispatchToProps = (dispatch) => {
 }
 ```
 
-Now we have access to this function via `props`. Because this is an api request, we'll want to call this when ever our component mounts, let's import `useEffect` from `react`:
+Now we have access to this function via `props`. Because this is an API request, we'll want to call this whenever our component mounts, let's import `useEffect` from `react`:
 
 ```js
 import React, { useEffect } from 'react'
 ```
 
-Now set up a `useEffect` that involes the `fetchDepartments` function:
+Now set up a `useEffect` that involves the `fetchDepartments` function:
 
 ```js
 useEffect(() => {
@@ -133,7 +132,7 @@ useEffect(() => {
 
 Refresh the browser and check your developer console, you should see an array of data being logged.
 
-Let's get this information into state, in the `DepartmentActions.js` file, we'll dispatch a `type` with a `payload` to update our state, add the following below the `departments` variable:
+Let's get this information into state. In the `DepartmentActions.js` file, we'll dispatch a `type` with a `payload` to update our state. Add the following below the `departments` variable:
 
 ```js
 dispatch({
@@ -158,7 +157,9 @@ export const getDepartments = () => async (dispatch) => {
 }
 ```
 
-Now great, this works, but what if we forgot to set it up correctly initially?
+![Night King](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fperezhilton.com%2Fwp-content%2Fuploads%2F2016%2F05%2Fgame-of-thrones-nights-king.gif&f=1&nofb=1)
+
+Great! This works, but what if we forgot to set it up correctly initially?
 
 Modify `getDepartments` to look like the following:
 
@@ -180,7 +181,7 @@ You should see the following error message:
 
 **`Error: Actions must be plain objects. Use custom middleware for async actions.`**
 
-The reason being for this is that Redux is looking for objects to be returned to update our state, however the minute we start doing asynchronous tasks, our function now returns a promise instead of an object, thats where `redux-thunk` comes in. It essentially pauses our state update momentarily while the promise is resolved. Once the promise resolves we `dispatch` the update to our reducer.
+The reason being for this is that Redux is looking for objects to be returned to update our state. However, the minute we start doing asynchronous tasks, our function now returns a promise instead of an object, thats where `redux-thunk` comes in. It essentially pauses our state update momentarily while the promise is resolved. Once the promise resolves, we `dispatch` the update to our reducer.
 
 Revert your function back to the below:
 
@@ -207,26 +208,28 @@ const someAction = () => ({
 })
 ```
 
+![Hot Pie](https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.pastemagazine.com%2Fwww%2Farticles%2Fgot-game-of-thrones-30908892-500-281.gif&f=1&nofb=1)
+
 ## You Do
-
-Now that we've covered redux actions and redux thunk, it's time to put it into practice:
-
-
-
-- Create a new component called `Products`, this component should have access to our redux store. Replace the function in the `component` prop in the `Route` in app.js with your `Products` component.
-
-- When this component mounts we want to get department by id and store its products in state.
-
-- Create a Product Reducer, you should store an array of products in state. Make sure to create a type and have a default case for this reducer. Don't forget to add it to your store!
-
-- Create a new department action that retrieves the department's products, a function has been imported for you.
-
-- Make sure to `dispatch` the information into state.
-
-- You'll want to add make sure the function is accessible as `props` in your `Products` component.
-
-- You're able to access the department's id through the address bar utitilizing `props.match.params.id`. HINT: You're going to want to use this id and pass it to your action which will in turn be passed to the `GetDepartmentProducts` as an argument.
-
-- You'll want to `observe` the id in the address bar for changes, make sure to add it to the `useEffect` dependency array.
+Now that we've covered Redux actions and Redux Thunk, it's time to put it into practice:
+- Create a new component called `Products`. This component should have access to our Redux store. Replace the function in the `component` prop in the `Route` in **App.js** with your `Products` component.
+  - When this component mounts, we want to get department by id and store its products in state.
+- Create a Product Reducer. You should store an array of products in state. Make sure to create a type and have a default case for this reducer. Don't forget to add it to your store!
+- Create a new department action that retrieves the department's products. A function has been imported for you.
+  - Make sure to `dispatch` the information into state.
+  - You'll want to add make sure the function is accessible as `props` in your `Products` component.
+- You're able to access the department's id through the address bar utitilizing `props.match.params.id`. HINT: You're going to want to use this id and pass it to your action, which will in turn be passed to the `GetDepartmentProducts` as an argument.
+- You'll want to `observe` the id in the address bar for changes. Make sure to add it to the `useEffect` dependency array.
 
 If everything was done correctly, you should see a new list of products every time you click on a new department.
+
+![Tormund](https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnerdist.com%2Fwp-content%2Fuploads%2F2016%2F05%2Ftumblr_o7lap4DOU31vuvjq6o4_500.gif&f=1&nofb=1)
+
+## Recap
+In this lesson, we learned about Redux Thunk and how we can use this middleware to break up Redux's default synchronous behavior.  We created a department store where we could view each department and it's related products.
+
+## Resources
+- [Intro to Redux](https://github.com/SEI-R-1-25/u4_lesson_react_redux_intro)
+- [Reducers](https://github.com/SEI-R-1-25/u4_lesson_redux_reducers)
+- [Actions & Types](https://github.com/SEI-R-1-25/u4_lesson_redux_actions_types)
+- [Mapping State & Actions to Props](https://github.com/SEI-R-1-25/u4_lesson_mapping_state_props)
