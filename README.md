@@ -62,7 +62,7 @@ export default store
 
 Redux Thunk is now successfully integrated into our app!
 
-![Hodor](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmax-media.imgix.net%2Ftransfers%2F2016%2F3%2F4%2F3987b97493592509fdf331de366969e3fa82ed50.gif&f=1&nofb=1)
+![Hodor](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FzeJG0HbeWZCSs%2Fgiphy.gif&f=1&nofb=1)
 
 ## Making Asynchronous Calls In Redux
 
