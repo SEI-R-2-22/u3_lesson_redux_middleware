@@ -23,6 +23,38 @@ With Redux, every operation we perform must be `synchronous`, which means that w
 
 ![Tyrion](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcopyhackers.com%2Fwp-content%2Fuploads%2F2016%2F11%2FGame-of-Thrones-Tyrion-Pour-Wine.gif&f=1&nofb=1)
 
+## Services
+
+On the frontend, inside our `src` directory, we have a directory called `services`. A "Service" is a file that contains a group of functions that handle the axios call for a particular endpoint.  You should typically group and name service files by the endpoint they interact with.
+
+In this example, we have a file called `DepartmentService`.  It's job is to handle all of ouyr axios calls for our departments endpoint.  Take a look:
+
+```javascript
+  import Client from './'
+
+  export const GetDepartments = async () => {
+    try {
+      const res = await Client.get('/departments')
+      return res.data
+    } catch (error) {
+      throw error
+    }
+  }
+
+  export const GetDepartmentProducts = async (departmentId) => {
+    try {
+      const res = await Client.get(`/departments/${departmentId}`)
+      return res.data.Products
+    } catch (error) {
+      throw error
+    }
+  }
+```
+
+A "Service" creates a copy of axios and configures it for our particular need.  Then we use that copy to make different requests. This prevents us from having to repeatedly make similar axios calls locally all throughout our app. We let our Service do it for us.  Take a look at the diagram below:
+
+![Services](https://i.imgur.com/7qIwymz.png)
+
 ## Applying Middleware to our Applications
 
 Start by installing Redux Thunk in the client directory:
