@@ -89,7 +89,7 @@ const store = createStore(
   combineReducers({
     departmentState: DepartmentReducer
   }),
-  applyMiddleware(thunk, composeWithDevTools)
+  composeWithDevTools(applyMiddleware(thunk))
 )
 
 export default store
