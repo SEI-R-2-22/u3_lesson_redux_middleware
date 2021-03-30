@@ -3,6 +3,7 @@
 ![Cersei](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FFMQ1jRXFeoMco%2Fgiphy.gif&f=1&nofb=1)
 
 ## Getting Started
+
 - `fork` and `clone`
 - `npm install` to install our dependencies
 - `npm run setup` to create and migrate our database
@@ -25,33 +26,33 @@ With Redux, every operation we perform must be `synchronous`, which means that w
 
 ## Services
 
-On the frontend, inside our `src` directory, we have a directory called `services`. A "Service" is a file that contains a group of functions that handle the axios call for a particular endpoint.  You should typically group and name service files by the endpoint they interact with.
+On the frontend, inside our `src` directory, we have a directory called `services`. A "Service" is a file that contains a group of functions that handle the axios call for a particular endpoint. You should typically group and name service files by the endpoint they interact with.
 
-In this example, we have a file called `DepartmentService`.  It's job is to handle all of ouyr axios calls for our departments endpoint.  Take a look:
+In this example, we have a file called `DepartmentService`. It's job is to handle all of ouyr axios calls for our departments endpoint. Take a look:
 
 ```javascript
-  import Client from './'
+import Client from './'
 
-  export const GetDepartments = async () => {
-    try {
-      const res = await Client.get('/departments')
-      return res.data
-    } catch (error) {
-      throw error
-    }
+export const GetDepartments = async () => {
+  try {
+    const res = await Client.get('/departments')
+    return res.data
+  } catch (error) {
+    throw error
   }
+}
 
-  export const GetDepartmentProducts = async (departmentId) => {
-    try {
-      const res = await Client.get(`/departments/${departmentId}`)
-      return res.data.Products
-    } catch (error) {
-      throw error
-    }
+export const GetDepartmentProducts = async (departmentId) => {
+  try {
+    const res = await Client.get(`/departments/${departmentId}`)
+    return res.data.Products
+  } catch (error) {
+    throw error
   }
+}
 ```
 
-A "Service" creates a copy of axios and configures it for our particular need.  Then we use that copy to make different requests. This prevents us from having to repeatedly make similar axios calls locally all throughout our app. We let our Service do it for us.  Take a look at the diagram below:
+A "Service" creates a copy of axios and configures it for our particular need. Then we use that copy to make different requests. This prevents us from having to repeatedly make similar axios calls locally all throughout our app. We let our Service do it for us. Take a look at the diagram below:
 
 ![Services](https://i.imgur.com/7qIwymz.png)
 
@@ -60,13 +61,14 @@ A "Service" creates a copy of axios and configures it for our particular need.  
 Start by installing Redux Thunk in the client directory:
 
 ```sh
-npm install redux-thunk
+npm install redux-thunk redux-devtools-extension
 ```
 
 We'll need to tell redux to apply our middleware, start by importing `applyMiddleware` from `redux` in `store/index.js`:
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 ```
 
 Now we need to import `redux-thunk`:
@@ -79,6 +81,7 @@ Let's add Redux Thunk to our application, modify the `createStore` function:
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import DepartmentReducer from './reducers/DepartmentReducer'
 import thunk from 'redux-thunk'
 
@@ -86,7 +89,7 @@ const store = createStore(
   combineReducers({
     departmentState: DepartmentReducer
   }),
-  applyMiddleware(thunk)
+  applyMiddleware(thunk, composeWithDevTools)
 )
 
 export default store
@@ -243,7 +246,9 @@ const someAction = () => ({
 ![Hot Pie](https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.pastemagazine.com%2Fwww%2Farticles%2Fgot-game-of-thrones-30908892-500-281.gif&f=1&nofb=1)
 
 ## You Do
+
 Now that we've covered Redux actions and Redux Thunk, it's time to put it into practice:
+
 - Create a new component called `Products`. This component should have access to our Redux store. Replace the function in the `component` prop in the `Route` in **App.js** with your `Products` component.
   - When this component mounts, we want to get department by id and store its products in state.
 - Create a Product Reducer. You should store an array of products in state. Make sure to create a type and have a default case for this reducer. Don't forget to add it to your store!
@@ -258,9 +263,11 @@ If everything was done correctly, you should see a new list of products every ti
 ![Tormund](https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fnerdist.com%2Fwp-content%2Fuploads%2F2016%2F05%2Ftumblr_o7lap4DOU31vuvjq6o4_500.gif&f=1&nofb=1)
 
 ## Recap
-In this lesson, we learned about Redux Thunk and how we can use this middleware to break up Redux's default synchronous behavior.  We created a department store where we could view each department and it's related products.
+
+In this lesson, we learned about Redux Thunk and how we can use this middleware to break up Redux's default synchronous behavior. We created a department store where we could view each department and it's related products.
 
 ## Resources
+
 - [Intro to Redux](https://github.com/SEI-R-1-25/u4_lesson_react_redux_intro)
 - [Reducers](https://github.com/SEI-R-1-25/u4_lesson_redux_reducers)
 - [Actions & Types](https://github.com/SEI-R-1-25/u4_lesson_redux_actions_types)
