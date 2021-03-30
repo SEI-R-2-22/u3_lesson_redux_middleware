@@ -42,13 +42,15 @@ export const GetDepartments = async () => {
   }
 }
 
-export const GetDepartmentProducts = async (departmentId) => {
-  try {
-    const res = await Client.get(`/departments/${departmentId}`)
-    return res.data.Products
-  } catch (error) {
-    throw error
-  }
+export const GetDepartmentProducts = {
+  return async (departmentId) => {
+    try {
+      const res = await Client.get(`/departments/${departmentId}`)
+      return res.data.Products
+    } catch (error) {
+      throw error
+    }
+   }
 }
 ```
 
