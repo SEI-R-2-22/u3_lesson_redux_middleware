@@ -42,15 +42,13 @@ export const GetDepartments = async () => {
   }
 }
 
-export const GetDepartmentProducts = {
-  return async (departmentId) => {
-    try {
-      const res = await Client.get(`/departments/${departmentId}`)
-      return res.data.Products
-    } catch (error) {
-      throw error
-    }
-   }
+export const GetDepartmentProducts = async (departmentId) => {
+  try {
+    const res = await Client.get(`/departments/${departmentId}`)
+    return res.data.Products
+  } catch (error) {
+    throw error
+  }
 }
 ```
 
@@ -116,10 +114,12 @@ Notice the different syntax here for our action: we're defining a function and t
 Let's add a `try/catch` block to this function:
 
 ```js
-export const LoadDepartments = () => async (dispatch) => {
-  try {
-  } catch (error) {
-    throw error
+export const LoadDepartments = () => {
+  return async (dispatch) => {
+    try {
+    } catch (error) {
+      throw error
+    }
   }
 }
 ```
