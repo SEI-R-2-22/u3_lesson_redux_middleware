@@ -28,7 +28,7 @@ With Redux, every operation we perform must be `synchronous`, which means that w
 
 On the frontend, inside our `src` directory, we have a directory called `services`. A "Service" is a file that contains a group of functions that handle the axios call for a particular endpoint. You should typically group and name service files by the endpoint they interact with.
 
-In this example, we have a file called `DepartmentService`. It's job is to handle all of ouyr axios calls for our departments endpoint. Take a look:
+In this example, we have a file called `DepartmentService`. Its job is to handle all of our axios calls for our departments endpoint. Take a look:
 
 ```javascript
 import Client from './'
@@ -106,7 +106,7 @@ Now that Redux Thunk is integrated as middleware, we can start making requests t
 In the `DepartmentActions.js` let's create a new action called `getDepartments`:
 
 ```js
-export const getDepartments = () => async (dispatch) => {}
+export const LoadDepartments = () => async (dispatch) => {}
 ```
 
 Notice the different syntax here for our action: we're defining a function and then returning an `asynchronous` function with dispatch being passed as an argument. Remember, `dispatch` comes from Redux in order to execute our state update.
@@ -114,7 +114,7 @@ Notice the different syntax here for our action: we're defining a function and t
 Let's add a `try/catch` block to this function:
 
 ```js
-export const getDepartments = () => async (dispatch) => {
+export const LoadDepartments = () => async (dispatch) => {
   try {
   } catch (error) {
     throw error
@@ -125,7 +125,7 @@ export const getDepartments = () => async (dispatch) => {
 Let's make a request to the API utilizing the `GetDepartments` function being imported for you:
 
 ```js
-export const getDepartments = () => async (dispatch) => {
+export const LoadDepartments = () => async (dispatch) => {
   try {
     const departments = await GetDepartments()
     console.log(departments)
@@ -138,7 +138,7 @@ export const getDepartments = () => async (dispatch) => {
 We won't be updating any state just yet, we still need to test our action to ensure it's working correctly. In the `Departments.js` file in `components`, import this `getDepartments` function:
 
 ```js
-import { getDepartments } from '../store/actions/DepartmentActions'
+import { LoadDepartments } from '../store/actions/DepartmentActions'
 ```
 
 Let's add it to `mapDispatchToProps`:
@@ -146,7 +146,7 @@ Let's add it to `mapDispatchToProps`:
 ```js
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchDepartments: () => dispatch(getDepartments())
+    fetchDepartments: () => dispatch(LoadDepartments())
   }
 }
 ```
@@ -179,7 +179,7 @@ dispatch({
 Here's the final function:
 
 ```js
-export const getDepartments = () => async (dispatch) => {
+export const LoadDepartments = () => async (dispatch) => {
   try {
     const departments = await GetDepartments()
     dispatch({
@@ -196,10 +196,10 @@ export const getDepartments = () => async (dispatch) => {
 
 Great! This works, but what if we forgot to set it up correctly initially?
 
-Modify `getDepartments` to look like the following:
+Modify `LoadDepartments` to look like the following:
 
 ```js
-export const getDepartments = async (dispatch) => {
+export const LoadDepartments = async (dispatch) => {
   try {
     const departments = await GetDepartments()
     dispatch({
@@ -221,7 +221,7 @@ The reason being for this is that Redux is looking for objects to be returned to
 Revert your function back to the below:
 
 ```js
-export const getDepartments = () => async (dispatch) => {
+export const LoadDepartments = () => async (dispatch) => {
   try {
     const departments = await GetDepartments()
     dispatch({
