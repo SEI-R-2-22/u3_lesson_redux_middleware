@@ -207,17 +207,15 @@ Great! This works, but what if we forgot to set it up correctly initially?
 Modify `LoadDepartments` to look like the following:
 
 ```js
-export const LoadDepartments = {
-  return async (dispatch) => {
-    try {
-      const departments = await GetDepartments()
-      dispatch({
-        type: GET_DEPARTMENTS,
-        payload: departments
-      })
-    } catch (error) {
-      throw error
-    }
+export const LoadDepartments = async (dispatch) => {
+  try {
+    const departments = await GetDepartments()
+    dispatch({
+      type: GET_DEPARTMENTS,
+      payload: departments
+    })
+  } catch (error) {
+    throw error
   }
 }
 ```
