@@ -278,7 +278,7 @@ In this lesson, we learned about Redux Thunk and how we can use this middleware 
 
 ## Resources
 
-- [Intro to Redux](https://github.com/SEI-R-1-25/u4_lesson_react_redux_intro)
-- [Reducers](https://github.com/SEI-R-1-25/u4_lesson_redux_reducers)
-- [Actions & Types](https://github.com/SEI-R-1-25/u4_lesson_redux_actions_types)
-- [Mapping State & Actions to Props](https://github.com/SEI-R-1-25/u4_lesson_mapping_state_props)
+- [Intro to Redux](https://github.com/SEI-R-4-26/u4_lesson_redux_intro)
+- [Reducers](https://github.com/SEI-R-4-26/u4_lesson_redux_reducers)
+- [Actions & Types](https://github.com/SEI-R-4-26/u4_lesson_redux_actions_types)
+- [Mapping State & Actions to Props](https://github.com/SEI-R-4-26/u4_lesson_mapping_state_props)
