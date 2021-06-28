@@ -14,7 +14,7 @@
 
 ## What is Middleware In Redux?
 
-With Redux, every operation we perform must be `synchronous`, which means that we must execute things inline. Take `async` promises for example, the function runs and `awaits` for a response, this is an anti-pattern in Redux and will give you an error. However, utilizing middleware, we can break these rules and perform asynchronous tasks in our actions. To do this we'll utilize a package called `redux-thunk`.
+With Redux, every operation we perform must be `synchronous`, which means that each function must return somethnig right away _(No Waiting!)_. Take `async` promises for example, the function runs and `awaits` for a response, this is an anti-pattern in Redux and will give you an error. However, utilizing middleware, we can break these rules and perform asynchronous tasks in our actions. To do this we'll utilize a package called `redux-thunk`.
 
 > By default, Redux’s actions are dispatched synchronously, which is a problem for any non-trivial app that needs to communicate with an external API or perform side effects. Redux also allows for middleware that sits between an action being dispatched and the action reaching the reducers.
 
