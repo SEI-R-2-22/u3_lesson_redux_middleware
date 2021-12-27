@@ -114,7 +114,7 @@ Redux Thunk is now successfully integrated into our app!
 
 Now that Redux Thunk is integrated as middleware, we can start making requests to our API.
 
-In the `DepartmentActions.js` let's create a new action called `getDepartments`:
+In the `DepartmentActions.js` of our Store, let's create a new action called `getDepartments`:
 
 ```js
 export const LoadDepartments = () => {
