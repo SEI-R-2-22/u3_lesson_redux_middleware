@@ -26,7 +26,7 @@ With Redux, every operation we perform must be `synchronous`, which means that e
 
 ## Services
 
-On the frontend, inside our `src` directory, we have a directory called `services`. A "Service" is a file that contains a group of functions that handle the axios call for a particular endpoint. You should typically group and name service files by the endpoint they interact with.
+On the frontend, inside our `src` directory, we have a directory called `services`. A "Service" is a file that contains a group of functions that handle the axios call for a particular endpoint. You should typically group and name service files by the endpoint they interact with. We are creating a Client in our services/index.js file, and importing into here to use
 
 In this example, we have a file called `DepartmentService`. Its job is to handle all of our axios calls for our departments endpoint. Take a look:
 
