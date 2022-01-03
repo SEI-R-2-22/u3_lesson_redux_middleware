@@ -286,10 +286,3 @@ If everything was done correctly, you should see a new list of products every ti
 ## Recap
 
 In this lesson, we learned about Redux Thunk and how we can use this middleware to break up Redux's default synchronous behavior. We created a department store where we could view each department and it's related products.
-
-## Resources
-
-- [Intro to Redux](https://github.com/SEI-R-4-26/u4_lesson_redux_intro)
-- [Reducers](https://github.com/SEI-R-4-26/u4_lesson_redux_reducers)
-- [Actions & Types](https://github.com/SEI-R-4-26/u4_lesson_redux_actions_types)
-- [Mapping State & Actions to Props](https://github.com/SEI-R-4-26/u4_lesson_mapping_state_props)
