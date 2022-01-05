@@ -84,7 +84,7 @@ With a plain basic Redux store, you can only do simple synchronous updates by di
 
 Thunks are the recommended middleware for basic Redux side effects logic, including complex synchronous logic that needs access to the store, and simple async logic like AJAX requests.
 
-ComposeWithDevTools and ApplyMiddleWare are doing exactly what their names imply: taking control of our DOM and state management, using a premade set of instructions to maintain our multiple state-changing functions. 
+ComposeWithDevTools and ApplyMiddleWare are doing exactly what their names imply: taking control of our DOM and state management, using a premade set of instructions to maintain our multiple state-changing functions.
 
 Let's add Redux Thunk to our application, modify the `createStore` function:
 
@@ -114,7 +114,7 @@ Redux Thunk is now successfully integrated into our app!
 
 Now that Redux Thunk is integrated as middleware, we can start making requests to our API.
 
-In the `DepartmentActions.js` of our Store, let's create a new action called `getDepartments`:
+In the `DepartmentActions.js` of our Store, let's create a new action called `LoadDepartments`:
 
 ```js
 export const LoadDepartments = () => {
