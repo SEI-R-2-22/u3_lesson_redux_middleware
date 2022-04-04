@@ -1,10 +1,10 @@
 'use strict'
-const faker = require('faker')
+const falso = require('@ngneat/falso')
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     const departments = [...Array(50)].map(() => ({
-      name: faker.commerce.department(),
-      createdAt: faker.date.past(),
+      name: falso.randDepartment(),
+      createdAt: falso.randPastDate(),
       updatedAt: new Date()
     }))
     return await queryInterface.bulkInsert('departments', departments)
