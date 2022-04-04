@@ -2,7 +2,8 @@ import { Route } from 'react-router-dom'
 import Departments from './components/Departments'
 import './styles/App.css'
 
-function App() {
+const App = () => {
+  
   return (
     <div className="App">
       <h3>Redux Middleware</h3>

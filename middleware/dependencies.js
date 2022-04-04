@@ -1,6 +1,5 @@
 module.exports = [
-  require('body-parser').json(),
-  require('body-parser').urlencoded({ extended: true }),
+  require('express').json(),
   require('cors')(),
   require('morgan')('dev')
 ]
