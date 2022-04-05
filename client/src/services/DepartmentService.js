@@ -9,9 +9,9 @@ export const GetDepartments = async () => {
   }
 }
 
-export const GetDepartmentProducts = async (departmentId) => {
+export const GetDepartmentProducts = async (id) => {
   try {
-    const res = await Client.get(`/departments/${departmentId}`)
+    const res = await Client.get(`/departments/${id}`)
     return res.data.Products
   } catch (error) {
     throw error

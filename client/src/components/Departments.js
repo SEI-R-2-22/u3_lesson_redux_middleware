@@ -1,15 +1,23 @@
+import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { LoadDepartments } from '../store/actions/DepartmentActions'
 
 const mapStateToProps = ({ departmentState }) => {
   return { departmentState }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    fetchDepartments: () => dispatch(LoadDepartments())
+  }
 }
 
 const Departments = (props) => {
+
+  useEffect(() => {
+    props.fetchDepartments()
+  }, [])
   
   return (
     <div>
