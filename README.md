@@ -152,7 +152,7 @@ export const LoadDepartments = () => {
 }
 ```
 
-We won't be updating any state just yet, we still need to test our action to ensure it's working correctly. In the `Departments.js` file in `components`, import this `getDepartments` function:
+We won't be updating any state just yet, we still need to test our action to ensure it's working correctly. In the `Departments.js` file in `components`, import this `LoadDepartments` function:
 
 ```js
 import { LoadDepartments } from '../store/actions/DepartmentActions'
