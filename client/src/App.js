@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Departments from './components/Departments'
 import './styles/App.css'
 
@@ -12,7 +12,9 @@ const App = () => {
           <Departments />
         </div>
         <div className="right">
-          <Route path="/departments/:id" component={() => <div></div>} />
+          <Routes>
+            <Route path="/departments/:id" element={() => <div></div>} />
+          </Routes>
         </div>
       </div>
     </div>

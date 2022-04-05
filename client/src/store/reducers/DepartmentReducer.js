@@ -2,7 +2,7 @@ const { DEPARTMENT_LOADING_TYPE, GET_DEPARTMENTS } = require('../types')
 
 const iState = {
   departments: [],
-  departmentsLoading: '' // Should be type enum('Loading', 'Loaded', 'Inactive')
+  departmentsLoading: '' // Would be type enum ('Loading', 'Loaded', 'Inactive')
 }
 
 const DepartmentReducer = (state = iState, action) => {

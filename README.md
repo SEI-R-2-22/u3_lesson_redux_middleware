@@ -4,17 +4,17 @@
 
 ## Getting Started
 
-- `fork` and `clone`
-- `npm install` to install our dependencies
+- `fork` and `clone` and `cd` into the new directory
+- `npm install` to install our backend dependencies
 - `npm run setup` to create and migrate our database
 - `npm run dev` to spin up our backend
-- In a new terminal, `cd` into the client directory
-- `npm install` to install our dependencies
+- In a new terminal, `cd` into the ***client*** directory
+- `npm install` to install our frontend dependencies (these already include `redux`, `react-redux`, and `react-router-dom`)
 - `npm start` to spin up our frontend
 
 ## What is Middleware In Redux?
 
-With Redux, every operation we perform must be `synchronous`, which means that each function must return somethnig right away _(No Waiting!)_. Take `async` promises for example, the function runs and `awaits` for a response, this is an anti-pattern in Redux and will give you an error. However, utilizing middleware, we can break these rules and perform asynchronous tasks in our actions. To do this we'll utilize a package called `redux-thunk`.
+With Redux, every operation we perform must be `synchronous`, which means that each function must return something right away _(No Waiting!)_. Take `async` promises for example, the function runs and `awaits` for a response, this is an anti-pattern in Redux and will give you an error. However, utilizing middleware, we can break these rules and perform asynchronous tasks in our actions. To do this we'll utilize a package called `redux-thunk`.
 
 > By default, Redux’s actions are dispatched synchronously, which is a problem for any non-trivial app that needs to communicate with an external API or perform side effects. Redux also allows for middleware that sits between an action being dispatched and the action reaching the reducers.
 
@@ -193,29 +193,7 @@ dispatch({
 })
 ```
 
-Here's the final function:
-
-```js
-export const LoadDepartments = () => {
-  return async (dispatch) => {
-    try {
-      const departments = await GetDepartments()
-      dispatch({
-        type: GET_DEPARTMENTS,
-        payload: departments
-      })
-    } catch (error) {
-      throw error
-    }
-  }
-}
-```
-
-![Night King](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fperezhilton.com%2Fwp-content%2Fuploads%2F2016%2F05%2Fgame-of-thrones-nights-king.gif&f=1&nofb=1)
-
-Great! This works, but what if we forgot to set it up correctly initially?
-
-Modify `LoadDepartments` to look like the following:
+Let's set it up like this:
 
 ```js
 export const LoadDepartments = async (dispatch) => {
@@ -237,10 +215,11 @@ You should see the following error message:
 
 The reason being for this is that Redux is looking for objects to be returned to update our state. However, the minute we start doing asynchronous tasks, our function now returns a promise instead of an object, thats where `redux-thunk` comes in. It essentially pauses our state update momentarily while the promise is resolved. Once the promise resolves, we `dispatch` the update to our reducer.
 
-Revert your function back to the below:
+Modify `LoadDepartments` to look like the following:
 
 ```js
 export const LoadDepartments = () => {
+
   return async (dispatch) => {
     try {
       const departments = await GetDepartments()
@@ -255,7 +234,9 @@ export const LoadDepartments = () => {
 }
 ```
 
-As long as you are not performing asynchronous operations, you can use the normal Redux action syntax:
+![Night King](https://thumbs.gfycat.com/FixedRightIbisbill-size_restricted.gif)
+
+As long as you are not performing asynchronous operations, you can use the normal Redux action syntax like this:
 
 ```js
 const someAction = () => ({
@@ -270,13 +251,13 @@ const someAction = () => ({
 
 Now that we've covered Redux actions and Redux Thunk, it's time to put it into practice:
 
-- Create a new component called `Products`. This component should have access to our Redux store. Replace the function in the `component` prop in the `Route` in **App.js** with your `Products` component.
+- Create a new component called `Products`. This component should have access to our Redux store. Replace the function in the `element` prop in the `Route` in **App.js** with your `Products` component.
   - When this component mounts, we want to get department by id and store its products in state.
 - Create a Product Reducer. You should store an array of products in state. Make sure to create a type and have a default case for this reducer. Don't forget to add it to your store!
 - Create a new department action that retrieves the department's products. A function has been imported for you.
   - Make sure to `dispatch` the information into state.
   - You'll want to add make sure the function is accessible as `props` in your `Products` component.
-- You're able to access the department's id through the address bar utitilizing `props.match.params.id`. HINT: You're going to want to use this id and pass it to your action, which will in turn be passed to the `GetDepartmentProducts` as an argument.
+- You're able to access the department's id through the address bar if we extract it with `useParams` from React Router. HINT: You're going to want to use this id and pass it to your action, which will in turn be passed to the `GetDepartmentProducts` as an argument.
 - You'll want to `observe` the id in the address bar for changes. Make sure to add it to the `useEffect` dependency array.
 
 If everything was done correctly, you should see a new list of products every time you click on a new department.
